@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Navigation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Web Navigation</h1>
+
+        <h2>Add a New Card</h2>
+        <form method="POST" class="form">
+            <input type="hidden" name="action" value="add">
+            <input type="text" name="url" placeholder="Website URL" required class="input-field">
+            <textarea name="note" placeholder="Remark (optional)" class="textarea-field"></textarea>
+            <button type="submit" class="button">Add</button>
+        </form>
+
+        <h2>Edit or Delete Cards</h2>
+        {% for card in cards %}
+        <form method="POST" class="card-form form">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <input type="text" name="url" value="{{ card.url }}" required class="input-field">
+            <textarea name="note" class="textarea-field">{{ card.note }}</textarea>
+            <div class="button-group">
+                <button type="submit" name="action" value="edit" class="button">Edit</button>
+                <button type="submit" name="action" value="delete" class="button delete-button">Delete</button>
+            </div>
+        </form>
+        {% endfor %}
+
+        <a href="{{ url_for('index') }}" class="back-button">Back to Navigation</a>
+    </div>
+</body>
+</html>

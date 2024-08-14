@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Navigation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Web Navigation</h1>
+        <div class="card-container">
+            {% for card in cards %}
+            <div class="card">
+                <a href="{{ card.url }}" target="_blank" class="card-url">{{ card.url }}</a>
+                <p class="card-note">{{ card.note }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{{ url_for('manage') }}" class="manage-button">Manage Navigation</a>
+    </div>
+</body>
+</html>
